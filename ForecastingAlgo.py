@@ -65,12 +65,6 @@ b1 = numer / denom                                      #scale factor (coefficie
 sError = XstdDev / np.sqrt(totalNumValues ** 2)         #standard error 
 b0 = mean_y - (b1 * mean_x)                             #bias coefficient    
 
-if (b1 >= 0.5):
-    isPos = "Strong positive correlation"
-elif (b1 > 0.0 and b1 < 0.5):
-    isPos = "Weak positive correlation"
-elif (b1 <= 0.0):
-    isPos = "No correlation"
 
 my_df = pd.DataFrame(data)
 XstdDevstr = str(XstdDev)
@@ -145,49 +139,6 @@ if (b1 > 0.0):
 elif (b1 <= 0.0):
   print("Negative Corelation, cannot predict future values with confidence")
 
-
-# print(reg.summary())
-
-# OUTPUT
-print("Scale factor coefficient B1: " + str(b1))
-print("Bias coefficient B0: " + str(b0))
-print(" ")
-print('Column A std dev: ' + XstdDevstr)
-print('Column B std dev: ' + YstdDevstr)
-print(" ")
-print("Model describes " + str(round(r2Percent,2)) + "% " + "chance of variation in dependent variable is explained by the independent variable")
-print(" ")
-print("SOURCE   " + "SUM OF SQUARES     " + " DEGREES OF FREEDOM    " + " Mean Square    ")
-print("Model    " + str(round(mSS,2)) + "         " + "       " + str(mDF) + "                       " + str(round(mMeanSqr,2)))
-print("Residual " + str(round(rSS,2)) + "       " + "      " + str(df-1) + "                    " + str(round(rMeanSqr,2)))
-print("Total    " + str(round(mse,2)) + "       " + "      " + str(df) + "                    " + str(round(tMeanSqr,2)))
-print(" ")
-print("Total number of observations tested: " + str(totalNumValues))
-print("F value (" + str(mDF) + ", " + str(df - 1) +") : " + str(round(fValue,2)))
-print("R-squared: " + str(round(r2_score,2)))
-print("Adjusted R-squared: " + str(round(adjustR2,2)))
-print("Root Mean Square Error: " + str(round(rmse,2)))
-
-if (pValue <= alphaValue):
-    randomChance = "NOT RANDOM"
-elif (pValue > alphaValue):
-    randomChance = "RANDOM"  
-print("") 
-print("") 
-print("CONCLUSION: 95% confidence that correlation is " + randomChance)
-#print(" ")
-#print("        " + "Coeff   " + "Std. Error     " + " t value    " + " P>|t|    " + "95% confidence level")
-#print("Sample: " + str(round(b1,2)) + "      " + str(round(sError,2)) + "          " + str(round(t1,2)) + "        " + str(round(pValue,2)) + "      " + str(round(lowerCI,2))+ "      " + str(round(upperCI,2)))
-
-if (b1 > 0.0):
-  print("") 
-  print("CONCLUSION: " + isPos.upper()) 
-  print("")
-  print("Value inputed: " + str(NewValue))
-  print("Predicted value: " + str(NewY))
-  print("95% confidence predicted range is between: " + str(NewY - (XstdDev * 2)) + " and " + str(NewY + (XstdDev * 2)))
-
-#!!!!!!!!!!!!!! begin visual plotting section!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 # Ploting Line
 plt.plot(x, y, color='#58b970', label='Regression Line')
